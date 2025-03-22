@@ -1,8 +1,13 @@
 import streamlit as st 
 import pickle
+import time
 import requests
 import ssl
 import certifi
+
+AUTHOR_DETAILS = """
+Hi! I am Ritwika. I like to spend time exploring ML models. This is my LinkedIn
+"""
 
 ssl_context = ssl.create_default_context(cafile=certifi.where())
 
@@ -14,7 +19,7 @@ recommendations_list = pickle.load(open('recommendations.pkl', 'rb'))
 def fetch_poster(tmdbId, apiKey):
     response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key={}'.format(tmdbId, apiKey), verify=certifi.where())
     json_data = response.json()
-    return 'https://image.tmdb.org/t/p/originaldata' + json_data['poster_path']
+    return 'https://image.tmdb.org/t/p/w500' + json_data['poster_path']
 
 def recommend(title, apiKey):
     movie_index = movies_data[movies_data['title'] == title].index[0]
@@ -26,7 +31,12 @@ def recommend(title, apiKey):
         posters.append(fetch_poster(movies_data.iloc[index]['tmdbId'], apiKey))
     return titles, posters
 
-
+def stream_data():
+    for word in AUTHOR_DETAILS.split(" "):
+        yield word + " "
+        time.sleep(0.05)
+    st.link_button("Linkedin", "https://www.linkedin.com/in/ritwika-pal-198b48199/")
+    
 
 st.title('Movie Recommendation Application')
 
@@ -36,7 +46,7 @@ chosen_movie = st.selectbox('Choose a movie', movies_list)
 
 if st.button("Recommend"):
     titles, posters = recommend(chosen_movie, apiKey)
-    col1, col2, col3, col4, col5 = st.beta_columns(5)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         st.text(titles[0])
         st.image(posters[0])
@@ -52,3 +62,7 @@ if st.button("Recommend"):
     with col5:
         st.text(titles[4])
         st.image(posters[4])
+
+
+if st.button("About Developer"):
+    st.write_stream(stream_data)
