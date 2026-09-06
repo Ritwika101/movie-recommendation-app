@@ -1,5 +1,5 @@
 ## Project Evolution
-The project was initially developed in **2022** as a Flask-based movie recommendation web application. In **2025**, it was substantially enhanced with an updated recommendation pipeline using the TMDB movie dataset, cosine-distance-based K-Nearest Neighbours, and a redesigned Streamlit interface for easier deployment and interactive use.
+The project was initially developed in 2022 as a Flask-based movie recommendation web application. In 2025, it was substantially enhanced with an updated recommendation pipeline using the TMDB movie dataset, cosine-distance-based K-Nearest Neighbours, and a redesigned Streamlit interface for easier deployment and interactive use.
 
 ## ML Model used
 The model is built using K Nearest neighbors after transforming around 4700 movies into vectors. 
@@ -7,9 +7,6 @@ The model is built using K Nearest neighbors after transforming around 4700 movi
 ## Dataset
 The dataset is taken from Kaggle: https://www.kaggle.com/datasets/aayushsoni4/tmdb-5000-movie-dataset-with-ratings?resource=download
 <br> Vectorization was done on the basis of movie cast, crew, overview, keywords genres etc. 
-
-## Frontend
-I used Streamlit for the frontend. 
 
 ## Application Link
 Navigate here to see the app: https://ritwika-movie-recommendation.streamlit.app/
